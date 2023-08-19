@@ -42,8 +42,8 @@ jobs:
         run: |
           ls -a update
           ls -a original
-          cd update
-          python3 reqs.py --scriptdir ../original --outputdir ../ 
+          pw="$(pwd)"
+          python3 "$pw"/update/reqs.py --scriptdir "$pw"/original --outputdir "$pw" 
           git config --global user.email "zuhhaga@gmail.com"
           git config --global user.name "zuhhaga"
           git add --all
