@@ -12,11 +12,11 @@ sudo python3 -m pip install -r requirements.txt
 sudo python3 main.py
 ```
 
-![image-20230430013103883](assets/img/README/image-20230430013103883.png)
+![image-20230430013103883](original/assets/img/README/image-20230430013103883.png)
 
-![image-20230430013119763](assets/img/README/image-20230430013119763.png)
+![image-20230430013119763](original/assets/img/README/image-20230430013119763.png)
 
-![image-20230430013148814](assets/img/README/image-20230430013148814.png)
+![image-20230430013148814](original/assets/img/README/image-20230430013148814.png)
 
 
 
