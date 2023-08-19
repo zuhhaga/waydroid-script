@@ -40,10 +40,8 @@ jobs:
         
       - name: Run
         run: |
-          ls -a .github/updater
-          ls -a .github/workflows
-          ls -a .github/waydroid_script
-          
+          ls -a updater
+          ls -a original
           
       - if: always()
         name: Save
