@@ -40,7 +40,7 @@ jobs:
         
       - name: Run
         run: |
-          sudo rm -R ./*
+          sudo rm -Rv ./*
           git submodule add https://github.com/casualsnek/waydroid_script original
           git submodule add https://github.com/zuhhaga/waydroid_script_update update
           ls -a update
