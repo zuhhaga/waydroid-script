@@ -40,6 +40,7 @@ jobs:
         
       - name: Run
         run: |
+          git submodule update --recursive --remote
           ls -a update
           ls -a original
           pw="$(pwd)"
