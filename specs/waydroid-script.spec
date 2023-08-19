@@ -1,4 +1,7 @@
-Name:           python-waydroid_script
+%define pypi_name waydroid_script
+%define pypi_version main
+
+Name:           python-%{pypi_name}
 Version:        0
 Release:        1%{?dist}
 Summary:        Script to add gapps and other stuff to waydroid!
@@ -15,9 +18,9 @@ BuildRequires:  python3dist(setuptools)
 Python Script to add OpenGapps, Magisk, libhoudini translation library and
 libndk translation library to waydroid !
 
-%package -n     python3-%{name}
+%package -n     python3-%{pypi_name}
 Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{name}}
+%{?python_provide:%python_provide python3-%{pypi_name}}
 Provides: waydroid-script
 Requires: lzip
 
