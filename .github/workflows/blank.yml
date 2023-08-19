@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3     
         with: 
-          submodules: true
+          submodules: false
       
       - name: Restore
         uses: burgerzuhsaga/apt_cache/restore@main
@@ -40,7 +40,9 @@ jobs:
         
       - name: Run
         run: |
-          git submodule update --recursive --remote
+          sudo rm -R ./*
+          git submodule add https://github.com/casualsnek/waydroid_script original
+          git submodule add https://github.com/zuhhaga/waydroid_script_update update
           ls -a update
           ls -a original
           pw="$(pwd)"
