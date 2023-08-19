@@ -43,6 +43,8 @@ jobs:
           ls -a update
           ls -a original
           pw="$(pwd)"
+          pip install -r "$pw/original/requirements.txt"
+          pip install requests_file
           python3 "$pw"/update/reqs.py --scriptdir "$pw"/original --outputdir "$pw"/output
           for i in $(ls "$pw"/output); do
               mv "$pw"{/output,}/"$i"
