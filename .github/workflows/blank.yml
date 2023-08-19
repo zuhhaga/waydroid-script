@@ -43,7 +43,10 @@ jobs:
           ls -a update
           ls -a original
           pw="$(pwd)"
-          python3 "$pw"/update/reqs.py --scriptdir "$pw"/original --outputdir "$pw" 
+          python3 "$pw"/update/reqs.py --scriptdir "$pw"/original --outputdir "$pw"/output
+          for i in $(ls "$pw"/output); do
+              mv "$pw"{/output,}/"$i"
+          done
           git config --global user.email "zuhhaga@gmail.com"
           git config --global user.name "zuhhaga"
           git add --all
