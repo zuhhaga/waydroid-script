@@ -1,0 +1,3 @@
+[submodule "update"]
+	path = update
+	url = https://github.com/zuhhaga/waydroid_script_update
