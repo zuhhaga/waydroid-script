@@ -1,0 +1,2 @@
+include waydroid_script/requirements.txt
+recursive-include waydroid_script/bin *
