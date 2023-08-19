@@ -19,6 +19,7 @@ libndk translation library to waydroid !
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{name}}
 Provides: waydroid-script
+Requires: lzip
 
 Requires:       python3dist(tqdm)
 Requires:       python3dist(requests)

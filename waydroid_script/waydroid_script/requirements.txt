@@ -1,4 +1,0 @@
-tqdm
-requests
-InquirerPy
-requests_file
