@@ -40,7 +40,7 @@ jobs:
         
       - name: Run
         run: |
-          ls -a updater
+          ls -a update
           ls -a original
           
       - if: always()
