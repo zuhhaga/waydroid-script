@@ -40,8 +40,6 @@ Summary: Binaries for waydroid-script package
 %description -n waydroid-script-binary-%{wayarch}
 Binaries for waydroid-script package.
 
-
-
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
@@ -58,15 +56,14 @@ Requires:       python3dist(requests_file)
 Python Script to add OpenGapps, Magisk, libhoudini translation library and
 libndk translation library to waydroid !
 
-
 %prep
 %autosetup -n %{pypi_name}-%{pypi_version}
 
 %build
 %py3_build
 %define  pypi_libdir    %{_usr}/lib/%{pypi_name}
-%define  pypi_bindir  %{pypi_libdir}/bin/
-%define  pypi_oldbindir  %{python3_sitelib}/%{pypi_name}/bin/
+%define  pypi_bindir  %{pypi_libdir}/bin
+%define  pypi_oldbindir  %{python3_sitelib}/%{pypi_name}/bin
 
 %install
 %py3_install
