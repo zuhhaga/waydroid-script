@@ -1,139 +1,49 @@
-%_waydroid_require() Requires: waydroid(%{1})
-%_waydroid_provide() Provides: waydroid(%{1})
-%_waydroidextradir %{_datadir}/waydroid-extra
+Name: waydroid-MicroG-UNLP-zip
+Version: 1
+Release: 1
+License: LGPL
+Summary: Waydroid extra files
+Source0: https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-UNLP-2.11.1-20230429100555.zip
 
-# required macros: NAME, SOURCE0, provisions
-%define build_waydroid_extra_from_file() %{lua:
+%if %{undefined _waydroidextradir}
+%define _waydroidextradir %{_datadir}/waydroid-extra
+%endif
+
+%if %{undefined _waydroid_unit}
+%define _waydroid_unit() waydroid(%1)
+%endif
+
+%if %{undefined _waydroid_provide}
+%define _waydroid_provide() Provides: %{_waydroid_unit %{1}}
+%endif
     
-    if not rpm.isdefined('SOURCE0') then
-       error('SOURCE0 is not defined')
-    end
-    
-    if not rpm.isdefined('NAME') then
-       error('NAME is not defined')
-    end
-    
-    if not rpm.isdefined('LICENSE') then
-       print([[License: LGPL
-]]) 
-    end
-    
-    if not rpm.isdefined('VERSION') then
-       print([[Version: 1
-]])
-       rpm.define('VERSION 1')
-    end
-    
-    if not rpm.isdefined('RELEASE') then
-       print([[Release: 1
-]])
-       rpm.define('RELEASE 1')
-    end
- 
- 
-    _source_url=rpm.expand('%{SOURCE0}')
-    _file=_source_url:match("^.*/(.*)$")
-    
-    nw=string.char(10)
-    name = rpm.expand('%{NAME}')
-    
-    file=rpm.expand('%{_datadir}/%{NAME}/') .. _file
-    
-    dirstr=rpm.expand('%{_waydroidextradir}/')
-    
-    post=''
-    postun=''
-    dirs={}
-    
-    tokens_len=#arg
-    
-    i = 0
-    
-    while i < tokens_len do
-       i = i + 1
-       token=arg[i]
-       dir=token:match("(.*/)") or ''
-       dirs[dir] = 1
-       print(rpm.expand('%_waydroid_provide ' .. token .. nw))
-    end
-    
-    
-    if not rpm.isdefined('SUMMARY') then
-       summary="Waydroid extra files"
-       print([[Summary: ]] .. summary .. [[
+%_waydroid_provide MicroG.zip
+%_waydroid_provide MicroG_UNLP.zip
 
 %description
-]] .. summary .. [[.
-]])
-    end
-    
-    print(nw)
-    
-    print([[%post
+%{summary}. 
+
+%post
 #!/bin/sh
 echo post install "$1"
 if [ "$1" == 1 ]; then
-]])
-    i = 0
-    
-    while i < tokens_len do
-      i = i + 1
-      token = arg[i]
-      print(rpm.expand("%{_sbindir}/update-alternatives --install '%{_waydroidextradir}/"..token.."' 'waydroid("..token..")' '"..file.."' 25"..nw))
-    end
-    
-    print('fi')
-    print(nw)
-    print(nw)
-    
-    print([[%postun
+%{_sbindir}/update-alternatives --install '%{_waydroidextradir}/MicroG.zip' '%{_waydroid_unit MicroG.zip}' '%{_datadir}/%{name}/MinMicroG-UNLP-2.11.1-20230429100555.zip' 25
+%{_sbindir}/update-alternatives --install '%{_waydroidextradir}/MicroG_UNLP.zip' '%{_waydroid_unit MicroG_UNLP.zip}' '%{_datadir}/%{name}/MinMicroG-UNLP-2.11.1-20230429100555.zip' 25
+fi
+   
+%postun
 #!/bin/sh
 echo post remove "$1"
 if [ "$1" == 0 ]; then
-]])
-    i = 0
+%{_sbindir}/update-alternatives --remove '%{_waydroid_unit MicroG.zip}' '%{_datadir}/%{name}/MinMicroG-UNLP-2.11.1-20230429100555.zip' 25
+%{_sbindir}/update-alternatives --remove '%{_waydroid_unit MicroG_UNLP.zip}' '%{_datadir}/%{name}/MinMicroG-UNLP-2.11.1-20230429100555.zip' 25
+fi
 
-    while i < tokens_len do
-      i = i + 1
-      token = arg[i]
-      print(rpm.expand("%{_sbindir}/update-alternatives --remove 'waydroid("..token..")' '"..file.."' 25"..nw))
-    end
-    
-    print('fi')
-    
-    print(nw)
-    print(nw)
-    print('%files')
-    print(nw)
-    print(file)
-    for key, value in pairs(dirs) do
-      print(nw)
-      print('%dir ')
-      print(dirstr)
-      print(key)
-    end
-    print(nw)
-    print(rpm.expand([[
-    
-%%install 
-mkdir -p '%{buildroot}%{_datadir}/%{NAME}'
-cp '%{_sourcedir}/]] .. _file .. [[' '%{buildroot}]] .. file .. [['
-    ]]))
-    buildroot=rpm.expand('%{buildroot}')
-    
-    for key, value in pairs(dirs) do
-      print(nw)
-      print("mkdir -p '")
-      print(buildroot)
-      print(dirstr)
-      print(key)
-      print("'")
-    end
-    
-}
+%files
+%{_datadir}/%{name}/MinMicroG-UNLP-2.11.1-20230429100555.zip
+%dir %{_waydroidextradir}/
 
-
-
-Name: waydroid-MicroG-UNLP-zip
-Source0: https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-UNLP-2.11.1-20230429100555.zip
-%build_waydroid_extra_from_file MicroG.zip MicroG_UNLP.zip
+%install
+mkdir -p '%{buildroot}%{_datadir}/%{name}'
+cp '%{_sourcedir}/MinMicroG-UNLP-2.11.1-20230429100555.zip' '%{buildroot}%{_datadir}/%{name}/MinMicroG-UNLP-2.11.1-20230429100555.zip'
+mkdir -p '%{buildroot}%{_waydroidextradir}/'

@@ -1,139 +1,58 @@
-%_waydroid_require() Requires: waydroid(%{1})
-%_waydroid_provide() Provides: waydroid(%{1})
-%_waydroidextradir %{_datadir}/waydroid-extra
+Name: waydroid-x86_64-13-MindTheGapps-zip
+Version: 1
+Release: 1
+License: LGPL
+Summary: Waydroid extra files
+Source0: https://github.com/Howard20181/MindTheGappsBuilder/releases/download/20230323/MindTheGapps-13.0.0-x86_64-20230323.zip
 
-# required macros: NAME, SOURCE0, provisions
-%define build_waydroid_extra_from_file() %{lua:
+%if %{undefined _waydroidextradir}
+%define _waydroidextradir %{_datadir}/waydroid-extra
+%endif
+
+%if %{undefined _waydroid_unit}
+%define _waydroid_unit() waydroid(%1)
+%endif
+
+%if %{undefined _waydroid_provide}
+%define _waydroid_provide() Provides: %{_waydroid_unit %{1}}
+%endif
     
-    if not rpm.isdefined('SOURCE0') then
-       error('SOURCE0 is not defined')
-    end
-    
-    if not rpm.isdefined('NAME') then
-       error('NAME is not defined')
-    end
-    
-    if not rpm.isdefined('LICENSE') then
-       print([[License: LGPL
-]]) 
-    end
-    
-    if not rpm.isdefined('VERSION') then
-       print([[Version: 1
-]])
-       rpm.define('VERSION 1')
-    end
-    
-    if not rpm.isdefined('RELEASE') then
-       print([[Release: 1
-]])
-       rpm.define('RELEASE 1')
-    end
- 
- 
-    _source_url=rpm.expand('%{SOURCE0}')
-    _file=_source_url:match("^.*/(.*)$")
-    
-    nw=string.char(10)
-    name = rpm.expand('%{NAME}')
-    
-    file=rpm.expand('%{_datadir}/%{NAME}/') .. _file
-    
-    dirstr=rpm.expand('%{_waydroidextradir}/')
-    
-    post=''
-    postun=''
-    dirs={}
-    
-    tokens_len=#arg
-    
-    i = 0
-    
-    while i < tokens_len do
-       i = i + 1
-       token=arg[i]
-       dir=token:match("(.*/)") or ''
-       dirs[dir] = 1
-       print(rpm.expand('%_waydroid_provide ' .. token .. nw))
-    end
-    
-    
-    if not rpm.isdefined('SUMMARY') then
-       summary="Waydroid extra files"
-       print([[Summary: ]] .. summary .. [[
+%_waydroid_provide gapps.zip
+%_waydroid_provide 13/gapps.zip
+%_waydroid_provide x86_64/13/gapps.zip
 
 %description
-]] .. summary .. [[.
-]])
-    end
-    
-    print(nw)
-    
-    print([[%post
+%{summary}. 
+
+%post
 #!/bin/sh
 echo post install "$1"
 if [ "$1" == 1 ]; then
-]])
-    i = 0
-    
-    while i < tokens_len do
-      i = i + 1
-      token = arg[i]
-      print(rpm.expand("%{_sbindir}/update-alternatives --install '%{_waydroidextradir}/"..token.."' 'waydroid("..token..")' '"..file.."' 25"..nw))
-    end
-    
-    print('fi')
-    print(nw)
-    print(nw)
-    
-    print([[%postun
+%{_sbindir}/update-alternatives --install '%{_waydroidextradir}/gapps.zip' '%{_waydroid_unit gapps.zip}' '%{_datadir}/%{name}/MindTheGapps-13.0.0-x86_64-20230323.zip' 25
+%{_sbindir}/update-alternatives --install '%{_waydroidextradir}/13/gapps.zip' '%{_waydroid_unit 13/gapps.zip}' '%{_datadir}/%{name}/MindTheGapps-13.0.0-x86_64-20230323.zip' 25
+%{_sbindir}/update-alternatives --install '%{_waydroidextradir}/x86_64/13/gapps.zip' '%{_waydroid_unit x86_64/13/gapps.zip}' '%{_datadir}/%{name}/MindTheGapps-13.0.0-x86_64-20230323.zip' 25
+fi
+   
+%postun
 #!/bin/sh
 echo post remove "$1"
 if [ "$1" == 0 ]; then
-]])
-    i = 0
+%{_sbindir}/update-alternatives --remove '%{_waydroid_unit gapps.zip}' '%{_datadir}/%{name}/MindTheGapps-13.0.0-x86_64-20230323.zip' 25
+%{_sbindir}/update-alternatives --remove '%{_waydroid_unit 13/gapps.zip}' '%{_datadir}/%{name}/MindTheGapps-13.0.0-x86_64-20230323.zip' 25
+%{_sbindir}/update-alternatives --remove '%{_waydroid_unit x86_64/13/gapps.zip}' '%{_datadir}/%{name}/MindTheGapps-13.0.0-x86_64-20230323.zip' 25
+fi
 
-    while i < tokens_len do
-      i = i + 1
-      token = arg[i]
-      print(rpm.expand("%{_sbindir}/update-alternatives --remove 'waydroid("..token..")' '"..file.."' 25"..nw))
-    end
-    
-    print('fi')
-    
-    print(nw)
-    print(nw)
-    print('%files')
-    print(nw)
-    print(file)
-    for key, value in pairs(dirs) do
-      print(nw)
-      print('%dir ')
-      print(dirstr)
-      print(key)
-    end
-    print(nw)
-    print(rpm.expand([[
-    
-%%install 
-mkdir -p '%{buildroot}%{_datadir}/%{NAME}'
-cp '%{_sourcedir}/]] .. _file .. [[' '%{buildroot}]] .. file .. [['
-    ]]))
-    buildroot=rpm.expand('%{buildroot}')
-    
-    for key, value in pairs(dirs) do
-      print(nw)
-      print("mkdir -p '")
-      print(buildroot)
-      print(dirstr)
-      print(key)
-      print("'")
-    end
-    
-}
+%files
+%{_datadir}/%{name}/MindTheGapps-13.0.0-x86_64-20230323.zip
+%dir %{_waydroidextradir}/
+%dir %{_waydroidextradir}/x86_64
+%dir %{_waydroidextradir}/x86_64/13
+%dir %{_waydroidextradir}/13
 
-
-
-Name: waydroid-x86_64-13-MindTheGapps-zip
-Source0: https://github.com/Howard20181/MindTheGappsBuilder/releases/download/20230323/MindTheGapps-13.0.0-x86_64-20230323.zip
-%build_waydroid_extra_from_file gapps.zip 13/gapps.zip x86_64/13/gapps.zip
+%install
+mkdir -p '%{buildroot}%{_datadir}/%{name}'
+cp '%{_sourcedir}/MindTheGapps-13.0.0-x86_64-20230323.zip' '%{buildroot}%{_datadir}/%{name}/MindTheGapps-13.0.0-x86_64-20230323.zip'
+mkdir -p '%{buildroot}%{_waydroidextradir}/'
+mkdir -p '%{buildroot}%{_waydroidextradir}/x86_64'
+mkdir -p '%{buildroot}%{_waydroidextradir}/x86_64/13'
+mkdir -p '%{buildroot}%{_waydroidextradir}/13'
