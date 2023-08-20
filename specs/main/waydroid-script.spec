@@ -17,7 +17,7 @@
 %define wayarch x86
 %endif
 
-Name:           python-%{pypi_name}
+Name:           %{pypi_name}
 Version:        0
 Release:        1%{?dist}
 Summary:        Script to add gapps and other stuff to waydroid!
