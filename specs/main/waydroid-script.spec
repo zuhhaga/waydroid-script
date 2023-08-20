@@ -25,7 +25,6 @@ Summary:        Script to add gapps and other stuff to waydroid!
 License:        MIT
 URL:            http://github.com/casualsnek/waydroid-script
 Source0:        %{pypi_name}-%{pypi_version}.tar.gz
-BuildArch:      noarch
 
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
@@ -35,6 +34,7 @@ Python Script to add OpenGapps, Magisk, libhoudini translation library and
 libndk translation library to waydroid !
 
 %package -n     waydroid-script-binary-%{wayarch}
+BuildArch: any
 Summary: Binaries for waydroid-script package
 
 %description -n waydroid-script-binary-%{wayarch}
@@ -42,7 +42,7 @@ Binaries for waydroid-script package.
 
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
-BuildArch: any
+BuildArch:      noarch
 %{?python_provide:%python_provide python3-%{pypi_name}}
 Provides: waydroid-script
 Requires: lzip
