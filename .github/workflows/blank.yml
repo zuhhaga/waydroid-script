@@ -27,11 +27,11 @@ jobs:
         with: 
           submodules: false
       
-      - name: Restore
-        uses: burgerzuhsaga/apt_cache/restore@main
-        with: 
-          key: ubuntu-cache
-          pkgs: libwww-curl-perl libjson-parse-perl libkrb5-dev
+     # - name: Restore
+    #    uses: burgerzuhsaga/apt_cache/restore@main
+   #     with: 
+  #        key: ubuntu-cache
+#          pkgs: libwww-curl-perl libjson libkrb5-dev
 
             
       - uses: actions/setup-python@v4
@@ -61,9 +61,9 @@ jobs:
           git commit -m update
           git push
           
-      - if: always()
-        name: Save
-        uses: burgerzuhsaga/apt_cache/save@main
-        with: 
-          key: ubuntu-cache
-          token: ${{ secrets.GITHUB_TOKEN }}
+   #   - if: always()
+    #    name: Save
+     #   uses: burgerzuhsaga/apt_cache/save@main
+      #  with: 
+       #   key: ubuntu-cache
+         # token: ${{ secrets.GITHUB_TOKEN }}
