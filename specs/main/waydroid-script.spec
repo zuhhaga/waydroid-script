@@ -7,7 +7,7 @@
 
 %ifarch %{arm64} aarch64 
 %define wayarch arm64-v8a 
-%endif
+%endif   Script to add gapps and other stuff to waydroid!
 
 %ifarch %{x86_64} x86_64 amd64
 %define wayarch x86_64
@@ -39,12 +39,12 @@ Summary: Binaries for waydroid-script package
 Binaries for waydroid-script package.
 
 %package -n    waydroid-script
-Summary:        %{summary}
+Summary:         Script to add gapps and other stuff to waydroid!
 BuildArch: noarch
 Requires:     python3-%{pypi_name}
 
 %package -n     python3-%{pypi_name}
-Summary:        %{summary}
+Summary:          Script to add gapps and other stuff to waydroid!
 BuildArch: noarch
 %{?python_provide:%python_provide python3-%{pypi_name}}
 Requires: lzip
