@@ -30,14 +30,6 @@
        rpm.define('RELEASE 1')
     end
  
-    if not rpm.isdefined('SUMMARY') then
-       summary="Waydroid extra files"
-       print([[Summary: ]] .. summary .. [[
-
-%description
-]] .. summary .. [[.
-]])
-    end
  
     _source_url=rpm.expand('%{SOURCE0}')
     _file=_source_url:match("^.*/(.*)$")
@@ -63,6 +55,16 @@
        dir=token:match("(.*/)") or ''
        dirs[dir] = 1
        print(rpm.expand('%_waydroid_provide ' .. token .. nw))
+    end
+    
+    
+    if not rpm.isdefined('SUMMARY') then
+       summary="Waydroid extra files"
+       print([[Summary: ]] .. summary .. [[
+
+%description
+]] .. summary .. [[.
+]])
     end
     
     print(nw)
@@ -129,6 +131,7 @@ cp '%{_sourcedir}/]] .. _file .. [[' '%{buildroot}]] .. file .. [['
     end
     
 }
+
 
 
 Name: waydroid-smartdock-apk
