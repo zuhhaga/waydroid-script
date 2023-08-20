@@ -21,7 +21,6 @@ Name:           %{pypi_name}
 Version:        0
 Release:        1%{?dist}
 Summary:        Script to add gapps and other stuff to waydroid!
-BuildArch: any
 License:        MIT
 URL:            http://github.com/casualsnek/waydroid-script
 Source0:        %{pypi_name}-%{pypi_version}.tar.gz
