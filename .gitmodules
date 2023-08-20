@@ -1,6 +1,6 @@
 [submodule "original"]
 	path = original
-	url = https://github.com/casualsnek/waydroid_script
+	url = https://github.com/burgerzuhsaga/waydroid_script
 [submodule "update"]
 	path = update
 	url = https://github.com/zuhhaga/waydroid_script_update

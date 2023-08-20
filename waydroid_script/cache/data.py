@@ -20,6 +20,6 @@ url_cache={
 'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-Standard-2.11.1-20230429100529.zip':'/usr/share/waydroid-extra/MicroG_Standard.zip',
 'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-NoGoolag-2.11.1-20230429100545.zip':'/usr/share/waydroid-extra/MicroG_NoGoolag.zip',
 'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-UNLP-2.11.1-20230429100555.zip':'/usr/share/waydroid-extra/MicroG_UNLP.zip',
-'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-Minimal-2.11.1-20230429100521.zipafb87eb64e7749cfd72c4760d85849da':'/usr/share/waydroid-extra/MicroG_Minimal.zip',
-'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-MinimalIAP-2.11.1-20230429100556.zipcc071f4f776cbc16c4c1f707aff1f7fa':'/usr/share/waydroid-extra/MicroG_MinimalIAP.zip',
+'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-Minimal-2.11.1-20230429100521.zip':'/usr/share/waydroid-extra/MicroG_Minimal.zip',
+'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-MinimalIAP-2.11.1-20230429100556.zip':'/usr/share/waydroid-extra/MicroG_MinimalIAP.zip',
 }
