@@ -40,12 +40,12 @@ Binaries for waydroid-script package.
 
 %package -n    waydroid-script
 Summary:        %{summary}
-BuidArch: noarch
+BuildArch: noarch
 Requires:     python3-%{pypi_name}
 
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
-BuidArch: noarch
+BuildArch: noarch
 %{?python_provide:%python_provide python3-%{pypi_name}}
 Requires: lzip
 Requires: waydroid-script-binary-%{wayarch}
