@@ -74,7 +74,7 @@ ln -s %{pypi_bindir}   %{buildroot}%{pypi_oldbindir}
 
 
 %files -n waydroid-script-binary-%{wayarch}
-%{pypi_oldbindir}/%{wayarch}/resetprop 
+%{pypi_bindir}/%{wayarch}/resetprop 
 %dir %{pypi_bindir}/%{wayarch}/
 %dir %{pypi_bindir}/
 %dir %{pypi_libdir}/
