@@ -1,3 +1,7 @@
+%_waydroid_require() Requires: waydroid(%{1})
+%_waydroid_provide() Provides: waydroid(%{1})
+%_waydroidextradir %{_datadir}/waydroid-extra
+
 # required macros: NAME, SOURCE0, provisions
 %define build_waydroid_extra_from_file() %{lua:
     
@@ -126,12 +130,6 @@ cp '%{_sourcedir}/]] .. _file .. [[' '%{buildroot}]] .. file .. [['
     
 }
 
-
-BuildRequires: rpm_macro(_waydroid_name)
-BuildRequires: rpm_macro(build_waydroid_extra_from_file)
-Version:    1
-Release:    1
-License:    LGPL
 
 Name: waydroid-x86-11-OpenGapps-zip
 Source0: https://sourceforge.net/projects/opengapps/files/x86/20220503/open_gapps-x86-11.0-pico-20220503.zip

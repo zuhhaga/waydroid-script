@@ -1,3 +1,7 @@
+%_waydroid_require() Requires: waydroid(%{1})
+%_waydroid_provide() Provides: waydroid(%{1})
+%_waydroidextradir %{_datadir}/waydroid-extra
+
 # required macros: NAME, SOURCE0, provisions
 %define build_waydroid_extra_from_file() %{lua:
     
@@ -126,12 +130,6 @@ cp '%{_sourcedir}/]] .. _file .. [[' '%{buildroot}]] .. file .. [['
     
 }
 
-
-BuildRequires: rpm_macro(_waydroid_name)
-BuildRequires: rpm_macro(build_waydroid_extra_from_file)
-Version:    1
-Release:    1
-License:    LGPL
 
 Name: waydroid-11-libndk-zip
 Source0: https://github.com/supremegamers/vendor_google_proprietary_ndk_translation-prebuilt/archive/9324a8914b649b885dad6f2bfd14a67e5d1520bf.zip

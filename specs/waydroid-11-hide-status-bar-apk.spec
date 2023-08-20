@@ -1,3 +1,7 @@
+%_waydroid_require() Requires: waydroid(%{1})
+%_waydroid_provide() Provides: waydroid(%{1})
+%_waydroidextradir %{_datadir}/waydroid-extra
+
 # required macros: NAME, SOURCE0, provisions
 %define build_waydroid_extra_from_file() %{lua:
     
@@ -126,12 +130,6 @@ cp '%{_sourcedir}/]] .. _file .. [[' '%{buildroot}]] .. file .. [['
     
 }
 
-
-BuildRequires: rpm_macro(_waydroid_name)
-BuildRequires: rpm_macro(build_waydroid_extra_from_file)
-Version:    1
-Release:    1
-License:    LGPL
 
 Name: waydroid-11-hide-status-bar-apk
 Source0: https://github.com/ayasa520/hide-status-bar/releases/download/v0.0.1/app-release.apk

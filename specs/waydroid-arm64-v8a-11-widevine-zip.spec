@@ -1,3 +1,7 @@
+%_waydroid_require() Requires: waydroid(%{1})
+%_waydroid_provide() Provides: waydroid(%{1})
+%_waydroidextradir %{_datadir}/waydroid-extra
+
 # required macros: NAME, SOURCE0, provisions
 %define build_waydroid_extra_from_file() %{lua:
     
@@ -126,12 +130,6 @@ cp '%{_sourcedir}/]] .. _file .. [[' '%{buildroot}]] .. file .. [['
     
 }
 
-
-BuildRequires: rpm_macro(_waydroid_name)
-BuildRequires: rpm_macro(build_waydroid_extra_from_file)
-Version:    1
-Release:    1
-License:    LGPL
 
 Name: waydroid-arm64-v8a-11-widevine-zip
 Source0: https://github.com/supremegamers/vendor_google_proprietary_widevine-prebuilt/archive/a1a19361d36311bee042da8cf4ced798d2c76d98.zip
