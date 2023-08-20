@@ -34,7 +34,6 @@ Python Script to add OpenGapps, Magisk, libhoudini translation library and
 libndk translation library to waydroid !
 
 %package -n     waydroid-script-binary-%{wayarch}
-BuildArch: any
 Summary: Binaries for waydroid-script package
 
 %description -n waydroid-script-binary-%{wayarch}
@@ -42,7 +41,6 @@ Binaries for waydroid-script package.
 
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
-BuildArch:      noarch
 %{?python_provide:%python_provide python3-%{pypi_name}}
 Provides: waydroid-script
 Requires: lzip
