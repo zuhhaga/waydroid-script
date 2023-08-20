@@ -42,6 +42,7 @@ Binaries for waydroid-script package.
 
 %package -n     python3-%{pypi_name}
 Summary:        %{summary}
+BuildArch: any
 %{?python_provide:%python_provide python3-%{pypi_name}}
 Provides: waydroid-script
 Requires: lzip
