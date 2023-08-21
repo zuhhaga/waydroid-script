@@ -110,8 +110,6 @@ Source0:        %{pypi_name}-%{pypi_version}.tar.gz
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
 
-%requirements
-
 %description
 Python Script to add OpenGapps, Magisk, libhoudini translation library and
 libndk translation library to waydroid !
@@ -140,7 +138,6 @@ for str in string.gmatch(rpm.expand('%{namerequires}'), "([^%s]+)") do
     print('Requires: python3dist(' .. str .. ')')
 end
 }
-
 
 %description -n waydroid-script
 Python Script to add OpenGapps, Magisk, libhoudini translation library and
@@ -210,9 +207,10 @@ source = rpm.expand('%{mainsource}')
 name = 'waydroid-' .. rpm.expand('%{flavor}')
 
 arg={}
-
+len = 0
 for str in string.gmatch(rpm.expand('%{nameprovides}'), "([^%s]+)") do
-    arg[#arg+1] = str
+    len=len + 1
+    arg[len] = str
 end
 
 ind=0
