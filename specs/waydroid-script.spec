@@ -57,9 +57,9 @@ Binaries for waydroid-script package.
 
 %package -n     python3-%{pypi_name}
 Summary:          Script to add gapps and other stuff to waydroid!
-BuildArch: noarch
 %{?python_provide:%python_provide python3-%{pypi_name}}
 Requires: lzip
+Provides:  python3dist(%{pypi_name})
 Requires: waydroid-script-binary-%{wayarch}
 
 %{lua:
