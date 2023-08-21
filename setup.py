@@ -31,10 +31,5 @@ and libndk translation library to waydroid !""",
     install_requires=requirements,
     packages=find_packages(),
     include_package_data=True,
-    entry_points={
-        'console_scripts': [
-            'waydroid-script = main:main',
-        ],
-    },
     zip_safe=False
 ) 

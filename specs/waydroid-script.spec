@@ -94,7 +94,12 @@ mkdir -p %{buildroot}%{pypi_bindir}/%{wayarch}/
 mv   %{buildroot}%{pypi_oldbindir}/%{wayarch}/resetprop    %{buildroot}%{pypi_bindir}/%{wayarch}/resetprop
 rm -R %{buildroot}%{pypi_oldbindir}
 ln -s %{pypi_bindir}   %{buildroot}%{pypi_oldbindir}
+cat << 'EOF' > %{buildroot}%{_bindir}/waydroid-script
+#!/usr/bin/python3
+from waydroid_script import main
+main.main()
 
+EOF
 
 %files -n waydroid-script-binary-%{wayarch}
 %{pypi_bindir}/%{wayarch}/resetprop 
