@@ -96,6 +96,6 @@ debug_hooks={
 }
 
 def default():
-    from . import data
+    from cache import data
     return Session(data.url_cache, debug_hooks)
 

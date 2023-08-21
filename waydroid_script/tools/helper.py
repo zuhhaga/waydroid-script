@@ -4,7 +4,7 @@ import platform
 import re
 import subprocess
 import sys
-requests=__import__("cache.data", fromlist=("cache")).url_cache
+requests=__import__("cache.hooks", fromlist=("cache")).default()
 from tools.logger import Logger
 from tqdm import tqdm
 import hashlib
