@@ -4,7 +4,6 @@
 <flavor>11-nodataperm-zip</flavor>
 <flavor>11-libhoudini-zip</flavor>
 <flavor>11-hide-status-bar-apk</flavor>
-<flavor>magisk-delta-apk</flavor>
 <flavor>smartdock-apk</flavor>
 <flavor>x86_64-11-widevine-zip</flavor>
 <flavor>x86_64-13-widevine-zip</flavor>
