@@ -107,7 +107,7 @@ Summary:        Script to add gapps and other stuff to waydroid!
 License:        MIT
 URL:            http://github.com/casualsnek/waydroid-script
 Source0:        %{pypi_name}-%{pypi_version}.tar.gz
-BuildArch: noarch
+BuildArch: %{ix86}  %{x86_64} %{arm64} %{arm}
 
 Requires:     python3-%{pypi_name}
 
@@ -121,7 +121,6 @@ libndk translation library to waydroid !
 
 %package -n     waydroid-script-binary-%{wayarch}
 Summary: Binaries for waydroid-script package
-BuildArch: %{ix86}  %{x86_64} %{arm64} %{arm}
 
 %description -n waydroid-script-binary-%{wayarch}
 Binaries for waydroid-script package.
