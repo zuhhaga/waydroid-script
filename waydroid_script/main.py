@@ -16,7 +16,7 @@ from stuff.ndk import Ndk
 from stuff.nodataperm import Nodataperm
 from stuff.smartdock import Smartdock
 from stuff.widevine import Widevine
-import tools.helper as helper
+from tools import helper
 from tools import container
 from tools import images
 
