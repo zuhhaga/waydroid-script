@@ -64,7 +64,10 @@ Requires: waydroid-script-binary-%{wayarch}
 
 %{lua:
 for str in string.gmatch(rpm.expand('%{namerequires}'), "([^%s]+)") do
-    print('Requires: python3dist(' .. str .. ')')
+    print('Requires: python3dist(' .. str .. [[
+    )
+
+]])
 end
 }
 
