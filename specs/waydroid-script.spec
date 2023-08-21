@@ -42,7 +42,6 @@ libndk translation library to waydroid !
 
 %package -n     waydroid-script
 Summary: Binaries for waydroid-script package
-BuildArch: noarch
 Requires:     python3-%{pypi_name}
 
 %description -n waydroid-script
