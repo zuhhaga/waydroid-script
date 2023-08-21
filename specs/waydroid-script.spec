@@ -95,8 +95,11 @@
 %elifarch %{ix86} 
 %define wayarch x86
 %endif
-
+%if "%{flavor}" == "script"
+Name:           python-%{pypi_name}
+%else
 Name:           waydroid-%{flavor}
+%endif
 Version:        0
 Release:        1%{?dist}
 
@@ -107,9 +110,8 @@ Summary:        Script to add gapps and other stuff to waydroid!
 License:        MIT
 URL:            http://github.com/casualsnek/waydroid-script
 Source0:        %{pypi_name}-%{pypi_version}.tar.gz
-BuildArch: %{ix86}  %{x86_64} %{arm64} %{arm}
 
-Requires:     python3-%{pypi_name}
+BuildArch: %{ix86}  %{x86_64} %{arm64} %{arm}
 
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
@@ -117,6 +119,15 @@ BuildRequires:  python3dist(setuptools)
 %description
 Python Script to add OpenGapps, Magisk, libhoudini translation library and
 libndk translation library to waydroid !
+
+%package -n     waydroid-script
+Summary: Binaries for waydroid-script package
+BuildArch: noarch
+Requires:     python3-%{pypi_name}
+
+%description -n waydroid-script
+Executables for waydroid-script package.
+
 
 %package -n     waydroid-script-binary-%{wayarch}
 Summary: Binaries for waydroid-script package
@@ -164,7 +175,7 @@ ln -s %{pypi_bindir}   %{buildroot}%{pypi_oldbindir}
 %dir %{pypi_bindir}/
 %dir %{pypi_libdir}/
 
-%files
+%files -n     waydroid-script
 %attr(755,  root, root) %{_bindir}/waydroid-script
 
 %files -n python3-%{pypi_name}
@@ -198,7 +209,13 @@ if (not a) or (not b) then
 end
 
 source = rpm.expand('%{mainsource}')
-name = 'waydroid-' .. rpm.expand('%{flavor}')
+name = rpm.expand('%{NAME}')
+buildroot = rpm.expand('%{buildroot}')
+filename = source:match("^.*/(.*)$") or source
+path = rpm.expand('%{_datadir}/') .. name .. '/' .. filename
+waydroidextradir = rpm.expand('%{_waydroidextradir}')
+alternatives = rpm.expand('%{_sbindir}/update-alternatives')
+buildwaydroidextradir = rpm.expand('%{buildroot}') .. waydroidextradir
 
 arg={}
 len = 0
@@ -232,10 +249,6 @@ while ind < len do
   print(rpm.expand('%_waydroid_provide ' .. arg[ind]) .. nw)
 end
 
-filename = source:match("^.*/(.*)$") or source
-path = rpm.expand('%_datadir/') .. name .. '/' .. filename
-waydroidextradir = rpm.expand('%_waydroidextradir')
-
 if len > 0 then
 print([[
 
@@ -246,8 +259,6 @@ if [ "$1" == 1 ]; then
 ]])
 
 ind = 0
-
-alternatives = rpm.expand('%{_sbindir}/update-alternatives')
 
 if len == 1 then
   ind = ind + 1
@@ -318,9 +329,9 @@ print([[
 ]])
 
 for key, v in pairs(dirs) do
-  print('mkdir -p ' .. waydroidextradir .. key .. nw)
+  print('mkdir -p ' .. buildwaydroidextradir .. key .. nw)
 end
-print("cp '"..rpm.expand('%{_sourcedir}/')..filename.."' " )
+print("cp '"..rpm.expand('%{SOURCE0}') .. "' '" .. buildroot .. path .. "'" )
 
 }
 
