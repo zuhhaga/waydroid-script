@@ -1,6 +1,216 @@
 %define ADD_DESCRIPTION_FROM_SUMMARY yes
 %global flavor @BUILD_FLAVOR@%{nil}
 
+%define build_waydroid_extra_from_file(-) %{lua: 
+larg = {}
+lopt = {}
+
+len = #arg
+ind = 0
+
+while ind < len do
+  ind = ind + 1
+  tk = arg[ind]
+  if tk:sub(1, 2) == '--' then
+    ind = ind + 1
+    lopt[tk:sub(3)] = arg[ind]
+  else 
+    larg[#larg+1] = tk
+  end
+end
+
+arg = larg
+
+name = lopt['name'] or rpm.expand('%{?NAME:%NAME}')
+if name == '' then 
+  error('name is not defined')
+end
+source = lopt['source'] or rpm.expand('%{?SOURCE0:%SOURCE0}')
+if source == '' then
+  error('source is not defined')
+end
+
+license = lopt['license'] or rpm.expand('%{?LICENSE:%LICENSE}%{!?LICENSE:LGPL}')
+summary = lopt['summary'] or rpm.expand('%{?SUMMARY:%SUMMARY}%{!?SUMMARY:Waydroid extra files}')
+version = lopt['version'] or rpm.expand('%{?VERSION:%VERSION}%{!?VERSION:1}')
+release = lopt['release'] or rpm.expand('%{?RELEASE:%RELEASE}%{!?RELEASE:1}')
+
+main = lopt['dscr'] or rpm.expand('%{ADD_DESCRIPTION_FROM_SUMMARY}')
+main = main:lower()
+createdescription = (main == 'ok') or (main == 'yes') or (main == 'y') or (main == '1')
+
+--main = opt.main
+--main = main:lower()
+--main = (main == 'ok') or (main == 'yes') or (main == 'y') or (main == '1')
+
+a,b=rpm.isdefined('_waydroidextradir')
+if (not a) or b then
+  rpm.define('_waydroidextradir %{_datadir}/waydroid-extra')
+end
+
+a,b=rpm.isdefined('_waydroid_unit')
+if (not a) or (not b) then
+  rpm.define('_waydroid_unit() waydroid(%1)')
+end
+
+a,b=rpm.isdefined('_waydroid_provide')
+if (not a) or (not b) then
+  rpm.define('_waydroid_provide() Provides: %{_waydroid_unit %{1}}')
+end
+
+len=#arg
+
+ind=0
+dirs={}
+
+while ind < len do
+  ind = ind + 1
+  dir = arg[ind]
+  while dir do
+    dir=dir:match("(.*)/")
+    if dir then
+        dirs['/' .. dir ] = 1
+    else 
+        dirs[''] = 1
+    end
+  end
+end
+nw = string.char(10) .. string.char(13)
+
+--if main then
+    print('Name: ' .. name .. nw)
+--else
+--    print('%package -n ', name, nw)
+--end
+
+print('License: ' .. license .. nw
+   .. 'Summary: ' .. summary .. nw
+   .. 'Version: ' .. version .. nw
+   .. 'Release: ' .. release .. nw)
+
+ind = 0
+while ind < len do
+  ind = ind + 1
+  print(rpm.expand('%_waydroid_provide ' .. arg[ind]) .. nw)
+end
+
+filename = source:match("^.*/(.*)$") or source
+path = rpm.expand('%_datadir/') .. name .. '/' .. filename
+waydroidextradir = rpm.expand('%_waydroidextradir')
+
+if createdescription then
+    print([[
+
+%description 
+]])
+    --if main then
+    --print('-n ', name)
+    --end
+    print(summary .. '.' .. nw)
+end
+
+if len > 0 then
+print([[
+
+%post ]])
+--if main then 
+--    print('-n ', name)
+--end
+print([[
+
+#!/bin/sh
+echo post install "$1"
+if [ "$1" == 1 ]; then
+]])
+
+ind = 0
+
+alternatives = rpm.expand('%{_sbindir}/update-alternatives')
+
+if len == 1 then
+  ind = ind + 1
+  token = arg[ind]
+  print(
+  alternatives .. " --install '" .. waydroidextradir .. '/' 
+  ..token..rpm.expand("' '%{_waydroid_unit "..token.."}' '" ) 
+  ..path.."' 25" .. nw) 
+else 
+print('for i in ')
+while ind < len do
+  ind = ind + 1
+  token = arg[ind]
+  print("'" .. token .. "' ")
+end
+print('; do '..nw..alternatives.." --install '"..
+    waydroidextradir.."'"..rpm.expand('/"$i" "%{_waydroid_unit $1}" ')
+    .."'"..path .."' 25" .. nw .. "done" .. nw )
+end
+
+
+print([[
+fi
+
+%postun ]])
+--if main then 
+--    print('-n ', name)
+--end
+print([[
+
+#!/bin/sh
+echo post remove "$1"
+if [ "$1" == 0 ]; then
+]])
+
+ind = 0
+
+if len == 1 then
+  ind = ind + 1
+  token = arg[ind]
+  print(alternatives .. rpm.expand(" --remove '%{_waydroid_unit "
+  ..token.."}' '")..path.."' " .. nw) 
+else 
+print('for i in ')
+while ind < len do
+  ind = ind + 1
+  token = arg[ind]
+  print("'" .. token .. "' ")
+end
+print('; do '..nw..alternatives.. rpm.expand(
+  ' --remove "%{_waydroid_unit $1}" ')
+  .."'"..path .."' 25" .. nw .. "done" .. nw )
+end
+
+print('fi')
+end
+
+print(
+[[
+
+
+%files ]])
+--if main then 
+--    print('-n ', name)
+--end
+print(nw)
+print(path, nw)
+for key, v in pairs(dirs) do
+  print('%dir '.. waydroidextradir ..  key .. nw)
+end
+
+
+print([[
+
+%install 
+]])
+
+for key, v in pairs(dirs) do
+  print('mkdir -p ' .. waydroidextradir .. key .. nw)
+end
+print("cp '"..rpm.expand('%{_sourcedir}/')..filename.."' " )
+
+}
+
+
 %if "%{flavor}" == "11-libndk-zip" 
 %build_waydroid_extra_from_file --name waydroid-11-libndk-zip --source https://github.com/supremegamers/vendor_google_proprietary_ndk_translation-prebuilt/archive/9324a8914b649b885dad6f2bfd14a67e5d1520bf.zip libndktranslation.zip 11/libndktranslation.zip
 %elif "%{flavor}" == "13-libndk-zip" 
