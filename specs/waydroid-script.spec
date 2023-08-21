@@ -101,7 +101,7 @@ from waydroid_script import main
 main.main()
 
 EOF
-sed -i 's~\./bin~%{pypi_bindir}~'  '%{python3_sitelib}/%{pypi_name}/stuff/general.py'
+sed -i 's~\./bin~%{pypi_bindir}~'  '%{buildroot}%{python3_sitelib}/%{pypi_name}/stuff/general.py'
 
 %files -n waydroid-script-binary-%{wayarch}
 %{pypi_bindir}/%{wayarch}/resetprop 
