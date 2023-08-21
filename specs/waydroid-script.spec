@@ -43,6 +43,7 @@ Python Script to add OpenGapps, Magisk, libhoudini translation library and
 libndk translation library to waydroid !
 
 %package -n     waydroid-script
+AutoReqProv: no
 Summary: Binaries for waydroid-script package
 Requires:     python3-%{pypi_name}
 
@@ -51,12 +52,14 @@ Executables for waydroid-script package.
 
 
 %package -n     waydroid-script-binary-%{wayarch}
+AutoReqProv: no
 Summary: Binaries for waydroid-script package
 
 %description -n waydroid-script-binary-%{wayarch}
 Binaries for waydroid-script package.
 
 %package -n     python3-%{pypi_name}
+AutoReqProv: no
 Summary:          Script to add gapps and other stuff to waydroid!
 %{?python_provide:%python_provide python3-%{pypi_name}}
 Requires: lzip
