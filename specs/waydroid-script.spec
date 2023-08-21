@@ -1,6 +1,6 @@
 %define ADD_DESCRIPTION_FROM_SUMMARY yes
 %global flavor @BUILD_FLAVOR@%{nil}
-
+Name: waydroid-script
 %define build_waydroid_extra_from_file(-) %{lua: 
 larg = {}
 lopt = {}
