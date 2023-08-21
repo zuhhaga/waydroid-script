@@ -26,6 +26,8 @@ Name:           python-%{pypi_name}
 Version:        0
 Release:        1%{?dist}
 
+AutoReqProv: no
+
 Summary:        Script to add gapps and other stuff to waydroid!
 License:        MIT
 URL:            http://github.com/casualsnek/waydroid-script
