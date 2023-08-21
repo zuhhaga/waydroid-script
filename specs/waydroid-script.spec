@@ -78,19 +78,21 @@
 %define pypi_name waydroid_script
 %define pypi_version main
 
+%if %{undefined arm64}
+%define arm64 aarch64
+%endif
+
+%if %{undefined x86_64}
+%define x86_64 x86_64 amd64
+%endif
+
 %ifarch %{arm} 
 %define wayarch armeabi-v7a 
-%endif
-
-%ifarch %{arm64} aarch64 
+%elifarch %{arm64} 
 %define wayarch arm64-v8a 
-%endif   Script to add gapps and other stuff to waydroid!
-
-%ifarch %{x86_64} x86_64 amd64
+%elifarch %{x86_64}
 %define wayarch x86_64
-%endif
-
-%ifarch %{ix86} 
+%elifarch %{ix86} 
 %define wayarch x86
 %endif
 
@@ -105,7 +107,9 @@ Summary:        Script to add gapps and other stuff to waydroid!
 License:        MIT
 URL:            http://github.com/casualsnek/waydroid-script
 Source0:        %{pypi_name}-%{pypi_version}.tar.gz
+BuildArch: noarch
 
+Requires:     python3-%{pypi_name}
 
 BuildRequires:  python3-devel
 BuildRequires:  python3dist(setuptools)
@@ -117,14 +121,10 @@ libndk translation library to waydroid !
 
 %package -n     waydroid-script-binary-%{wayarch}
 Summary: Binaries for waydroid-script package
+BuildArch: %{ix86}  %{x86_64} %{arm64} %{arm}
 
 %description -n waydroid-script-binary-%{wayarch}
 Binaries for waydroid-script package.
-
-%package -n    waydroid-script
-Summary:         Script to add gapps and other stuff to waydroid!
-BuildArch: noarch
-Requires:     python3-%{pypi_name}
 
 %package -n     python3-%{pypi_name}
 Summary:          Script to add gapps and other stuff to waydroid!
