@@ -6,7 +6,7 @@ Script to add gapps and other stuff to waydroid!
 ## Interactive terminal interface
 
 ```
-git clone https://github.com/casualsnek/waydroid_script
+git clone https://github.com/burgerzuhsaga/waydroid_script
 cd waydroid_script
 sudo python3 -m pip install -r requirements.txt
 sudo python3 main.py

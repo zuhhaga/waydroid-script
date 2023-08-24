@@ -5,7 +5,7 @@ url_cache={
 'https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/81f2a51ef539a35aead396ab7fce2adf89f46e88.zip':'/usr/share/waydroid-extra/libhoudini.11.zip',
 'https://github.com/ayasa520/hide-status-bar/releases/download/v0.0.1/app-release.apk':'/usr/share/waydroid-extra/hidestatusbar.11.apk',
 'https://huskydg.github.io/magisk-files/app-debug.apk':'/usr/share/waydroid-extra/magisk.apk',
-'https://f-droid.org/repo/cu.axel.smartdock_198.apk':'/usr/share/waydroid-extra/smartdock.apk',
+'https://f-droid.org/repo/cu.axel.smartdock_1100.apk':'/usr/share/waydroid-extra/smartdock.apk',
 'https://github.com/supremegamers/vendor_google_proprietary_widevine-prebuilt/archive/48d1076a570837be6cdce8252d5d143363e37cc1.zip':'/usr/share/waydroid-extra/widevine.11.x86_64.zip',
 'https://github.com/supremegamers/vendor_google_proprietary_widevine-prebuilt/archive/a8524d608431573ef1c9313822d271f78728f9a6.zip':'/usr/share/waydroid-extra/widevine.13.x86_64.zip',
 'https://github.com/supremegamers/vendor_google_proprietary_widevine-prebuilt/archive/a1a19361d36311bee042da8cf4ced798d2c76d98.zip':'/usr/share/waydroid-extra/widevine.11.arm64-v8a.zip',
