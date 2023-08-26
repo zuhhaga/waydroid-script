@@ -41,11 +41,9 @@ jobs:
         
       - name: Run
         run: |
-          sudo rm -Rv ./*
-          git rm original
-          git submodule add https://github.com/burgerzuhsaga/waydroid_script original
-          git rm update
-          git submodule add https://github.com/zuhhaga/waydroid_script_update update
+          shopt -s dotglob
+          shopt -s extglob
+          sudo rm -Rv !(.git*|update|original)
           ls -a update
           ls -a original
           pw="$(pwd)"
