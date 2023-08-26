@@ -43,7 +43,7 @@ jobs:
         run: |
           shopt -s dotglob
           shopt -s extglob
-          sudo rm -Rv !(.git*|update|original)
+          sudo rm -Rv !(.|..|.git*|update|original)
           ls -a update
           ls -a original
           pw="$(pwd)"
