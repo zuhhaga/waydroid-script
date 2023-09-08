@@ -1,9 +1,8 @@
 url_cache={
 'https://github.com/supremegamers/vendor_google_proprietary_ndk_translation-prebuilt/archive/9324a8914b649b885dad6f2bfd14a67e5d1520bf.zip':'/usr/share/waydroid-extra/libndktranslation.11.zip',
 'https://github.com/supremegamers/vendor_google_proprietary_ndk_translation-prebuilt/archive/a090003c60df53a9eadb2df09bd4fd2fa86ea629.zip':'/usr/share/waydroid-extra/libndktranslation.13.zip',
-'https://github.com/ayasa520/hack_full_data_permission/archive/refs/heads/main.zip':'/usr/share/waydroid-extra/nodataperm.11.zip',
 'https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/81f2a51ef539a35aead396ab7fce2adf89f46e88.zip':'/usr/share/waydroid-extra/libhoudini.11.zip',
-'https://github.com/ayasa520/hide-status-bar/releases/download/v0.0.1/app-release.apk':'/usr/share/waydroid-extra/hidestatusbar.11.apk',
+'https://github.com/ayasa520/hide-status-bar/releases/download/v0.0.2/app-release.apk':'/usr/share/waydroid-extra/hidestatusbar.11.apk',
 'https://huskydg.github.io/magisk-files/app-debug.apk':'/usr/share/waydroid-extra/magisk.apk',
 'https://f-droid.org/repo/cu.axel.smartdock_1100.apk':'/usr/share/waydroid-extra/smartdock.apk',
 'https://github.com/supremegamers/vendor_google_proprietary_widevine-prebuilt/archive/48d1076a570837be6cdce8252d5d143363e37cc1.zip':'/usr/share/waydroid-extra/widevine.11.x86_64.zip',
@@ -22,4 +21,5 @@ url_cache={
 'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-UNLP-2.11.1-20230429100555.zip':'/usr/share/waydroid-extra/MicroG_UNLP.zip',
 'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-Minimal-2.11.1-20230429100521.zip':'/usr/share/waydroid-extra/MicroG_Minimal.zip',
 'https://github.com/ayasa520/MinMicroG/releases/download/latest/MinMicroG-MinimalIAP-2.11.1-20230429100556.zip':'/usr/share/waydroid-extra/MicroG_MinimalIAP.zip',
+'https://github.com/ayasa520/hack_full_data_permission/archive/d4beab7780eb792059d33e77d865579c9ee41546.zip':'/usr/share/waydroid-extra/nodataperm.11.x86_64.zip',
 }

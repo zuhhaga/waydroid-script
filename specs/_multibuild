@@ -1,7 +1,6 @@
 <multibuild>
 <flavor>11-libndk-zip</flavor>
 <flavor>13-libndk-zip</flavor>
-<flavor>11-nodataperm-zip</flavor>
 <flavor>11-libhoudini-zip</flavor>
 <flavor>11-hide-status-bar-apk</flavor>
 <flavor>smartdock-apk</flavor>
@@ -21,4 +20,5 @@
 <flavor>MicroG-UNLP-zip</flavor>
 <flavor>MicroG-Minimal-zip</flavor>
 <flavor>MicroG-MinimalIAP-zip</flavor>
+<flavor>x86_64-11-nodataperm-zip</flavor>
 </multibuild>

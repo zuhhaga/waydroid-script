@@ -50,3 +50,4 @@ class Ndk(General):
         name = re.findall("([a-zA-Z0-9]+)\.zip", self.dl_link)[0]
         shutil.copytree(os.path.join(self.extract_to, "vendor_google_proprietary_ndk_translation-prebuilt-" + name,
                         "prebuilts"), os.path.join(self.copy_dir, self.partition), dirs_exist_ok=True)
+
